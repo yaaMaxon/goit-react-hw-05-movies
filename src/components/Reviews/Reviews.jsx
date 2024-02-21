@@ -35,9 +35,9 @@ const Reviews = () => {
          <ul className={css.search_conteiner}>
           {reviews.map(({author, content, id}) => {
             return (
-              <li key={id}>
-                <h3>Author: {author}</h3>
-                <p>{content}</p>
+              <li key={id} className={css.search_item}>
+                <h3 className={css.search_name}>Author: {author}</h3>
+                <p className={css.search_content}>{content}</p>
             </li>
             )
           })}

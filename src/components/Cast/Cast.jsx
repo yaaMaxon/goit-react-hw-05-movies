@@ -4,6 +4,8 @@ import { getMovieCredits } from 'services/api';
 import { Loader } from 'components/Loader/Loader';
 import css from './Cast.module.css';
 
+import NoImg from '../../img/no_img.png';
+
 const Cast = () => {
   const { movieId } = useParams();
   const [cast, setCast] = useState(null);
@@ -36,13 +38,14 @@ useEffect(() => {
         <ul className={css.search_conteiner}>
           {cast.map(({profile_path, original_name, name, character, id}) => {
             return (
-              <li key={id}>
+              <li className={css.search_item} key={id}>
                 <img 
-                src={BASE_URL + profile_path} 
+                className={css.search_photo}
+                src={profile_path !== null ? BASE_URL + profile_path : NoImg} 
                 alt={original_name} />
               <div>
-                <p>{name}</p>
-                <p>Character: {character}</p>
+                <p className={css.search_name}>{name}</p>
+                <p className={css.search_character}>Character: {character}</p>
               </div>  
             </li>
             )

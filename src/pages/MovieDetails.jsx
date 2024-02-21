@@ -3,6 +3,7 @@ import { Link, NavLink, Route, Routes, useLocation, useParams } from "react-rout
 import { getMovieDetails } from "services/api";
 import { Loader } from "components/Loader/Loader";
 import css from '../components/App.module.css';
+import NoImg from '../img/no_img.png';
 
 const Cast = lazy(() => import('components/Cast/Cast'));
 const Reviews = lazy(() => import('components/Reviews/Reviews'));
@@ -35,7 +36,7 @@ useEffect(() => {
 }, [movieId]);
 
   return (
-    <div>
+    <div className={css.main_container}>
       <Link to={backLinkHref.current}>
         <button 
          type="button" 
@@ -46,17 +47,18 @@ useEffect(() => {
       {isLoading && <Loader />}
 
         {movie !== null && (
-      <div>
+      <div className={css.film_container}>
         <img 
-            src={BASE_URL + movie.poster_path} 
-            alt={movie.original_title} />
+            src={movie.poster_path !== null ? BASE_URL + movie.poster_path : NoImg} 
+            alt={movie.original_title}
+            className={css.film_img} />
         <div>
-           <h1>{movie.title}</h1>
-            <p>User score: {movie.vote_average}</p>
-            <h2>Overview</h2>
-            <p>{movie.overview}</p>
-            <h3>Genres</h3>
-            <p>
+           <h1 className={css.film_title}>{movie.title}</h1>
+            <p className={css.film_subtitle}>User score: {movie.vote_average}</p>
+            <h2 className={css.film_subtitle}>Overview</h2>
+            <p className={css.film_overview}>{movie.overview}</p>
+            <h3 className={css.film_subtitle}>Genres</h3>
+            <p className={css.film_list_descr}>
             {movie.genres.map((genre) => {
                 return genre.name;
             }).join(', ')}
@@ -65,8 +67,8 @@ useEffect(() => {
       </div>
         )}
 
-        <p>Additional information</p>
-        <div>
+        <p className={css.film_add_info}>Additional information</p>
+        <div className={css.film_list_container}>
             <NavLink to='cast' className={({ isActive }) => 
            `${css['header_link']} ${isActive ? css.active : ''}`}>Cast</NavLink>
             <NavLink to='reviews' className={({ isActive }) => 

@@ -9,19 +9,9 @@ const SearchMovie = lazy(() => import('pages/SearchMovie'));
 
 export const App = () => {
   return (
-    <div
-    style={{
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'center',
-          alignItems: 'center',
-          borderRadius: '5px',
-          backgroundColor: '#f2f2f2',
-          padding: '20px',
-        }}
-    >
-      <header>
-      <nav>
+    <div>
+      <header className={css.film_header}>
+      <nav className={css.film_header_list}>
         <NavLink className={({ isActive }) => 
            `${css['header_link']} ${isActive ? css.active : ''}`} 
         to="/">Home</NavLink>
